@@ -50,14 +50,11 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Subdirectory support for blackcobara.in/adminapi
-app.UsePathBase("/adminapi");
-
 // Apply CORS policy BEFORE MapControllers
 app.UseCors("AllowReactDev");
 
-app.UseSwagger(c => c.RouteTemplate = "swagger/{documentName}/swagger.json");
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/adminapi/swagger/v1/swagger.json", "Admin API v1"));
+app.UseSwagger();
+app.UseSwaggerUI();
 
 if (!app.Environment.IsDevelopment())
 {
