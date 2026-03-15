@@ -1,0 +1,8 @@
+bin/
+obj/
+publish/
+*.user
+*.suo
+.vs/
+adminapi_deploy.zip
+appsettings.Production.json

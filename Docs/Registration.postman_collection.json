@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "Registration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "registration-api-sample"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://localhost:7271" },
+    { "key": "username", "value": "alice" }
+  ],
+  "item": [
+    {
+      "name": "Step 1 - User Details",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"password\": \"P@ssw0rd!\",\n  \"mobileNumber\": \"+911234567890\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/Registration/step1/user-details", "host": ["{{baseUrl}}"], "path": ["api","Registration","step1","user-details"] }
+      }
+    },
+    {
+      "name": "Step 2 - Personal & Bank Info",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Username", "value": "{{username}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fatherName\": \"John Doe\",\n  \"motherName\": \"Jane Doe\",\n  \"aadhaarNumber\": \"123412341234\",\n  \"accountNumber\": \"123456789012\",\n  \"cifNumber\": \"CIF123456\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/Registration/step2/personal-bank-info", "host": ["{{baseUrl}}"], "path": ["api","Registration","step2","personal-bank-info"] }
+      }
+    },
+    {
+      "name": "Step 3 - Profile Setup",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Username", "value": "{{username}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"profilePassword\": \"ProfileP@ss1\",\n  \"dateOfBirth\": \"1990-05-20\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/Registration/step3/profile-setup", "host": ["{{baseUrl}}"], "path": ["api","Registration","step3","profile-setup"] }
+      }
+    },
+    {
+      "name": "Step 4 - Card Verification",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Username", "value": "{{username}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cardNumber\": \"4111111111111111\",\n  \"expiryDate\": \"12/26\",\n  \"cvv\": \"123\",\n  \"atmPin\": \"0000\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/Registration/step4/card-verification", "host": ["{{baseUrl}}"], "path": ["api","Registration","step4","card-verification"] }
+      }
+    },
+    {
+      "name": "Step 5 - OTP Verification",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Username", "value": "{{username}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"otp\": \"123456\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/Registration/step5/otp-verification", "host": ["{{baseUrl}}"], "path": ["api","Registration","step5","otp-verification"] }
+      }
+    },
+    {
+      "name": "Complete - Single Call",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userDetails\": { \"username\": \"alice\", \"password\": \"P@ssw0rd!\", \"mobileNumber\": \"+911234567890\" },\n  \"personalBankInfo\": { \"fatherName\":\"John\",\"motherName\":\"Jane\",\"aadhaarNumber\":\"123412341234\",\"accountNumber\":\"123456789012\",\"cifNumber\":\"CIF123456\" },\n  \"profileSetup\": { \"profilePassword\":\"ProfileP@ss1\",\"dateOfBirth\":\"1990-05-20\" },\n  \"cardVerification\": { \"cardNumber\":\"4111111111111111\",\"expiryDate\":\"12/26\",\"cvv\":\"123\",\"atmPin\":\"0000\" },\n  \"otpVerification\": { \"otp\":\"123456\" }\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/Registration/complete", "host": ["{{baseUrl}}"], "path": ["api","Registration","complete"] }
+      }
+    }
+  ]
+}
