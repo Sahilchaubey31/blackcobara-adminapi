@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^(.*)$ https://blackcobara-adminapi.onrender.com/$1 [P,L]
