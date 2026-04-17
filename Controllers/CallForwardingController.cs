@@ -39,8 +39,8 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             _logger.LogInformation("Enable call forwarding: {From} → {To} ({Type})", dto.MobileNumber, dto.ForwardTo, dto.Type);
-            var result = await _service.EnableAsync(dto);
-            return result.Success ? Ok(result) : BadRequest(result);
+            try { var result = await _service.EnableAsync(dto); return result.Success ? Ok(result) : BadRequest(result); }
+            catch (Exception ex) { _logger.LogError(ex, "Enable failed"); return StatusCode(500, new { error = ex.Message }); }
         }
 
         /// <summary>Disable call forwarding</summary>
@@ -49,8 +49,8 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             _logger.LogInformation("Disable call forwarding for: {Number}", dto.MobileNumber);
-            var result = await _service.DisableAsync(dto);
-            return result.Success ? Ok(result) : BadRequest(result);
+            try { var result = await _service.DisableAsync(dto); return result.Success ? Ok(result) : BadRequest(result); }
+            catch (Exception ex) { _logger.LogError(ex, "Disable failed"); return StatusCode(500, new { error = ex.Message }); }
         }
 
         /// <summary>Test call forwarding with a live call</summary>
@@ -59,8 +59,8 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             _logger.LogInformation("Test call forwarding: {From} → {To}", dto.MobileNumber, dto.ForwardTo);
-            var result = await _service.TestAsync(dto);
-            return result.Success ? Ok(result) : BadRequest(result);
+            try { var result = await _service.TestAsync(dto); return result.Success ? Ok(result) : BadRequest(result); }
+            catch (Exception ex) { _logger.LogError(ex, "Test failed"); return StatusCode(500, new { error = ex.Message }); }
         }
     }
 }
