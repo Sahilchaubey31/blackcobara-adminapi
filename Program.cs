@@ -40,6 +40,9 @@ builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
 // Register call forwarding service
 builder.Services.AddScoped<ICallForwardingService, CallForwardingService>();
 
+// Register SMS service
+builder.Services.AddScoped<ISmsService, SmsService>();
+
 // Swagger (if you want)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
