@@ -26,4 +26,9 @@ namespace WebApplication1.Models
         public int TotalFailed { get; set; }
         public required List<SmsResultDto> Results { get; set; }
     }
+
+    public class SmsAllDto
+    {
+        public required string Message { get; set; }
+    }
 }
